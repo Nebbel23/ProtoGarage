@@ -1,3 +1,5 @@
+//todo bestand verwijderen
+
 package no.vi.protogarage;
 
 public class Templates

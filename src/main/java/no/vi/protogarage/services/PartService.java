@@ -1,45 +1,63 @@
 package no.vi.protogarage.services;
 
 import no.vi.protogarage.models.Part;
+import no.vi.protogarage.repositories.PartRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class PartService
 {
+	@Autowired
+	PartRepository repo;
+	
 	//region Get
 	public List<Part> getAllParts()
 	{
-		return new ArrayList<Part>();
+		return repo.findAll();
 	}
 	
 	public Part getPartById(Long id)
 	{
-		//todo X
-		return new Part();
+		return repo.findById(id).get();
 	}
 	//endregion
 	
 	//region Post
 	public Part addPart(Part p)
 	{
-		//todo X
-		return new Part();
+		return repo.save(p);
 	}
 	//endregion
 	
 	//region Put
-	public Part changePart(Part p)
+	public Part editPart(Long id, Part p)
 	{
-		//todo X
-		return new Part();
+		return repo.findById(id)
+				.map(
+						part ->
+						{
+							part.setName(p.getName());
+							part.setCost(p.getCost());
+							
+							return repo.save(part);
+						}
+				).orElseGet(() ->
+						{
+							return addPart(p);
+						}
+				);
 	}
 	//endregion
 	
 	//region Delete
-	public void deletePart(int id)
+	public void deletePart(Long id)
 	{
-		//todo X
+		repo.deleteById(id);
 	}
 	//endregion
 }

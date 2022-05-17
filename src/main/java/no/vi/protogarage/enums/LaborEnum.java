@@ -1,7 +1,7 @@
 package no.vi.protogarage.enums;
 
 //todo geen enum maken maar arraylist
-public enum Labor
+public enum LaborEnum
 {
 	INSPECTION(60, 4500, "Inspectie"),		//Always costs €45,-
 	
@@ -17,7 +17,7 @@ public enum Labor
 	public final int cost;
 	public final String description;
 	
-	private Labor(int minutes, int cost, String description)
+	private LaborEnum(int minutes, int cost, String description)
 	{
 		this.minutes = minutes;
 		this.cost = cost;

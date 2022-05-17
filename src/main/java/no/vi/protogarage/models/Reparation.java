@@ -1,21 +1,36 @@
 package no.vi.protogarage.models;
 
-import java.util.ArrayList;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "reparations")
+@NoArgsConstructor
 public class Reparation
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false, name = "id")
+	private Long id;
+	@Column(nullable = false)
+	private String name;
+	@Column(nullable = false)
 	private boolean done = false;
-	private ArrayList<Part> parts;
-	private ArrayList<Labor> labor;
-	
-	public void addPart(Part p)
-	{
-		parts.add(p);
-	}
+	@Column
+	@OneToMany
+	private List<Labor> labor = new ArrayList<Labor>();
 	
 	public void addLabor(Labor l)
 	{
 		labor.add(l);
+	}
+	
+	public Reparation(String name)
+	{
+		this.name = name;
 	}
 	
 	//region Getters & setters
@@ -29,25 +44,36 @@ public class Reparation
 		this.done = done;
 	}
 	
-	public ArrayList<Part> getParts()
+	public String getName()
 	{
-		return parts;
+		return name;
 	}
 	
-	public ArrayList<Labor> getLabor()
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
+	public List<Labor> getLabor()
 	{
 		return labor;
+	}
+	
+	public void setLabor(List<Labor> labor)
+	{
+		this.labor = labor;
 	}
 	
 	public int getCost()
 	{
 		int cost = 0;
 		
-		for (Part p : parts)
-			cost += p.getCost();
-		
 		for (Labor l : labor)
+		{
 			cost += l.getCost();
+			for (Part p : l.getParts())
+				cost += p.getCost();
+		}
 		
 		return cost;
 	}

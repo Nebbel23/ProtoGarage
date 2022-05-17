@@ -3,56 +3,59 @@ package no.vi.protogarage.controllers;
 import no.vi.protogarage.models.Part;
 import no.vi.protogarage.services.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-//@RestController
-//@RequestMapping(path = "/part")
+import static no.vi.protogarage.config.Constants.PATH_PREFIX;
+
+@RestController
+@RequestMapping(PATH_PREFIX + "/part")
 public class PartController
 {
-	private final PartService ps;
+	private final PartService service;
 	
 	@Autowired
-	public PartController(PartService partService)
+	public PartController(PartService service)
 	{
-		this.ps = partService;
+		this.service = service;
 	}
 	
 	//region Get
 	@GetMapping
 	public List<Part> getAllParts()
 	{
-		return ps.getAllParts();
+		return service.getAllParts();
 	}
 	
 	@GetMapping("/{id}")
 	public Part getPartById(@PathVariable("id") Long id)
 	{
-		return ps.getPartById(id);
+		return service.getPartById(id);
 	}
-	//getById
-	
 	//endregion
 	
 	//region Post
-	
-	//addPart
-	
+	@PostMapping("/")
+	public void addPart(@RequestBody Part part)
+	{
+		service.addPart(part);
+	}
 	//endregion
 	
 	//region Put
-	
-	//changePart
-	
+	@PutMapping("/{id}")
+	public void editPart(@RequestBody Part part, @PathVariable("id") Long id)
+	{
+		service.editPart(id, part);
+	}
 	//endregion
 	
 	//region Delete
-	
-	//deletePart
-	
+	public void deletePart(Long id)
+	{
+		service.deletePart(id);
+	}
 	//endregion
 }

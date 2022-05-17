@@ -1,27 +1,39 @@
 package no.vi.protogarage.models;
 
-//import javax.persistence.*;
+import javax.persistence.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
-//@Entity
-//@Table
+@Entity
+@Table(name = "cars")
 public class Car
 {
-//	@Id
-////@GeneratedValue(strategy = GenerationType.IDENTITY)				//Kenteken wordt niet gegenereerd
-//	@Column(unique = true, nullable = false, name = "registration")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)                //Kenteken wordt niet gegenereerd
+	@Column(unique = true, nullable = false, name = "id")
+	private Long id;
+	@Column(nullable = false)
 	private String registration;
+	@Column(nullable = false)
 	private boolean atShop = false;
+	@Column(nullable = false)
 	private boolean payed = false;
-	private ArrayList<Reparation> reparations;
+	@Column
+	@OneToMany
+	private List<Reparation> reparations;// = new List<Reparation>(); //ArrayList<Reparation>();
+	
 	//todo pdf reader ding
 	private String papers;
 	
 	//region Getters & setters
-	private String getRegistration()
+	public String getRegistration()
 	{
 		return registration;
+	}
+	
+	public void setRegistration(String registration)
+	{
+		this.registration = registration;
 	}
 	
 	public boolean isAtShop()
@@ -42,6 +54,13 @@ public class Car
 	public void setPayed(boolean payed)
 	{
 		this.payed = payed;
+	}
+	
+	public List<Reparation> getReparations() {return reparations;}
+	
+	public void setReparations(List<Reparation> reparations)
+	{
+		this.reparations = reparations;
 	}
 	//endregion
 	

@@ -1,27 +1,26 @@
 package no.vi.protogarage.models;
 
-//import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.*;
+import java.util.List;
 
-//@Entity
-//@Table
+@Entity
+@Table(name = "customers")
 public class Customer
 {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(unique = true, nullable = false, name = "id")
-	private int id;
-//	@Column(nullable = false)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false, name = "id")
+	private Long id;
+	@Column(nullable = false)
 	private String name;
-//	@Column(nullable = false)
+	@Column(nullable = false)
 	private String phoneNr;
-//	@OneToMany
-//	@Column
-	private ArrayList<Car> cars;
-	private ArrayList<Reparation> reparations;
+	@Column
+	@OneToMany
+	private List<Car> cars;
 	
 	//region Getters & setters
-	public int getId()
+	public Long getId()
 	{
 		return id;
 	}
@@ -31,9 +30,29 @@ public class Customer
 		return name;
 	}
 	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
 	public String getPhoneNr()
 	{
 		return phoneNr;
+	}
+	
+	public void setPhoneNr(String phoneNr)
+	{
+		this.phoneNr = phoneNr;
+	}
+	
+	public List<Car> getCars()
+	{
+		return cars;
+	}
+	
+	public void setCars(List<Car> cars)
+	{
+		this.cars = cars;
 	}
 	//endregion
 }

@@ -3,7 +3,7 @@ package no.vi.protogarage.enums;
 //todo geen enum maken maar arraylist
 //@Entity
 //@Table
-public enum Parts
+public enum PartsEnum
 {
 	BLINKERFLUID(7999, "Knipperlichtvloeistof"),
 	BRAKEDISC(4395, "Remschijf"),
@@ -16,7 +16,7 @@ public enum Parts
 	public final int cost;
 	public final String name;
 	
-	private Parts(int cost, String name)
+	private PartsEnum(int cost, String name)
 	{
 		this.cost = cost;
 		this.name = name;
