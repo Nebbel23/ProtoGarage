@@ -1,5 +1,6 @@
 package no.vi.protogarage.services;
 
+import no.vi.protogarage.models.Car;
 import no.vi.protogarage.models.Customer;
 import no.vi.protogarage.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,13 @@ public class CustomerService
 	//region Post
 	public Customer addCustomer(Customer customer)
 	{
+		return repo.save(customer);
+	}
+	
+	public Customer addCarToCustomer(Long customerId, Car car)
+	{
+		Customer customer = repo.findById(customerId).get();
+		customer.addCar(car);
 		return repo.save(customer);
 	}
 	//endregion

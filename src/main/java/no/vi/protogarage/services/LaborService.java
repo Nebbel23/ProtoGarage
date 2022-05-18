@@ -1,6 +1,7 @@
 package no.vi.protogarage.services;
 
 import no.vi.protogarage.models.Labor;
+import no.vi.protogarage.models.Part;
 import no.vi.protogarage.repositories.LaborRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,10 +32,11 @@ public class LaborService
 		return repo.save(l);
 	}
 	
-	//todo
-	public Labor addPartToLabor(Long laborId, Long partId)
+	public Labor addPartToLabor(Long laborId, Part part)
 	{
-		return new Labor();
+		Labor labor = repo.findById(laborId).get();
+		labor.addPart(part);
+		return repo.save(labor);
 	}
 	//endregion
 	

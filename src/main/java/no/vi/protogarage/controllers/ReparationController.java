@@ -1,5 +1,7 @@
 package no.vi.protogarage.controllers;
 
+import no.vi.protogarage.models.Labor;
+import no.vi.protogarage.models.Part;
 import no.vi.protogarage.models.Reparation;
 import no.vi.protogarage.services.ReparationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +18,20 @@ public class ReparationController
 	private final ReparationService service;
 	
 	@Autowired
-	public ReparationController(ReparationService service)
+	private ReparationController(ReparationService service)
 	{
 		this.service = service;
 	}
 	
 	//region Get
 	@GetMapping
-	public List<Reparation> getAllReparations()
+	private List<Reparation> getAllReparations()
 	{
 		return service.getAllReparations();
 	}
 	
 	@GetMapping("/{id}")
-	public Reparation getReparationById(@PathVariable("id") Long id)
+	private Reparation getReparationById(@PathVariable("id") Long id)
 	{
 		return service.getReparationById(id);
 	}
@@ -40,6 +42,12 @@ public class ReparationController
 	private void addReparation(@RequestBody Reparation reparation)
 	{
 		service.addReparation(reparation);
+	}
+	
+	@PostMapping("/{id}")
+	private Reparation addLaborToReparation(@PathVariable("id") Long id, @RequestBody Labor labor)
+	{
+		return service.addLaborToReparation(id, labor);
 	}
 	//endregion
 	
@@ -52,7 +60,7 @@ public class ReparationController
 	//endregion
 	
 	//region Delete
-	public void deleteReparation(Long id)
+	private void deleteReparation(Long id)
 	{
 		service.deleteReparation(id);
 	}

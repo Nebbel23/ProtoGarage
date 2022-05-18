@@ -17,14 +17,14 @@ public class CarController
 	private final CarService service;
 	
 	@Autowired
-	public CarController(CarService service)
+	private CarController(CarService service)
 	{
 		this.service = service;
 	}
 	
 	//region Get
 	@GetMapping
-	public List<Car> getAllCars()
+	private List<Car> getAllCars()
 	{
 		return service.getAllCars();
 	}
@@ -32,7 +32,7 @@ public class CarController
 	//todo .get()
 	//todo public maken
 	@GetMapping("/{id}")
-	public Car getCarById(@PathVariable("id") Long id)
+	private Car getCarById(@PathVariable("id") Long id)
 	{
 		return service.getCarById(id);
 	}
@@ -40,7 +40,7 @@ public class CarController
 	
 	//region Post
 	@PostMapping("/")
-	public Car addCar(@RequestBody Car car)
+	private Car addCar(@RequestBody Car car)
 	{
 		return service.addCar(car);
 	}
@@ -48,7 +48,7 @@ public class CarController
 	
 	//region Put
 	@PutMapping("/{id}")
-	public Car editCar(@RequestBody Car car, @PathVariable("id") Long id)
+	private Car editCar(@RequestBody Car car, @PathVariable("id") Long id)
 	{
 		return service.editCar(id, car);
 	}
@@ -56,7 +56,7 @@ public class CarController
 	
 	//region Delete
 	@DeleteMapping
-	public void deleteCar(Long id)
+	private void deleteCar(Long id)
 	{
 		service.deleteCar(id);
 	}

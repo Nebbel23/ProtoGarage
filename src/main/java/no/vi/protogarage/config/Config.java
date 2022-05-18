@@ -7,15 +7,27 @@ import no.vi.protogarage.repositories.*;
 import no.vi.protogarage.security.PasswordEncoder;
 
 import lombok.AllArgsConstructor;
+import no.vi.protogarage.services.CarService;
+import no.vi.protogarage.services.LaborService;
+import no.vi.protogarage.services.PartService;
+import no.vi.protogarage.services.ReparationService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Objects;
 
 @AllArgsConstructor
 @Configuration
 public class Config
 {
 	private final PasswordEncoder encoder;
+	
+	private final PartService partService;
+	private final LaborService laborService;
+	private final ReparationService reparationService;
+	private final CarService carService;
+	
 	
 	@Bean
 	CommandLineRunner partCommandLineRunner(PartRepository repo)
@@ -33,19 +45,20 @@ public class Config
 			repo.save(wiper);
 		};
 	}
-
+	
+	
+	
 	@Bean
 	CommandLineRunner laborCommandLineRunner(LaborRepository repo)
 	{
-		//todo SEPARATE AND MAKE INDIVIDUAL CONFIGS
 		return args ->
 		{
 			Labor inspection = new Labor("Inspecteren", "Inspecteren van de auto", 30);
 			inspection.setFixedPriceCost(4500);					//Inspectie kost altijd €45,-
 			Labor wiperLabor = new Labor("Wisser vervangen", "Vervangen van de een ruitenwisser", 15);
-			//wiperLabor.addPart(wiper);
+			wiperLabor.addPart(partService.getPartById(4l));	//Wiper heeft 4 als id
 			Labor brakeDiscLabor = new Labor("Remschijf vervangen", "Vervangen van een remschijf", 60);
-			//brakeDiscLabor.addPart(brakeDisc);
+			brakeDiscLabor.addPart(partService.getPartById(2l));
 			
 			repo.save(inspection);
 			repo.save(wiperLabor);
@@ -79,13 +92,13 @@ public class Config
 	{
 		return args ->
 		{
-			Car car = new Car();
+			//Car car = new Car();
 			//car.addReparation(inspectionReparation);
 			//car.addReparation(replaceWiper);
 			//car.addReparation(replaceFrontBrakeDiscs);
 			//car.addReparation(tempReparation);
 			
-			repo.save(car);
+			//repo.save(car);
 		};
 	}
 	
@@ -95,8 +108,8 @@ public class Config
 		return args ->
 		{
 			//todo UserRoles toevoegen
-			AppUser admin = new AppUser("Niels", "AppAdmin", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.ADMIN, false, true);
-			AppUser appUser = new AppUser("Rick", "AppUser", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.MECHANIC, false, true);
+			AppUser admin = new AppUser("Niels", "admin", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.ADMIN, false, true);
+			AppUser appUser = new AppUser("Rick", "mechanic", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.MECHANIC, false, true);
 			appUserRepository.save(admin);
 			appUserRepository.save(appUser);
 		};

@@ -9,7 +9,7 @@ public class Part
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false, name = "id")
-	private int id;
+	private Long id;
 	@Column(nullable = false)
 	private String name;
 	@Column

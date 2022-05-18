@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 
@@ -17,20 +16,20 @@ public class PartController
 	private final PartService service;
 	
 	@Autowired
-	public PartController(PartService service)
+	private PartController(PartService service)
 	{
 		this.service = service;
 	}
 	
 	//region Get
 	@GetMapping
-	public List<Part> getAllParts()
+	private List<Part> getAllParts()
 	{
 		return service.getAllParts();
 	}
 	
 	@GetMapping("/{id}")
-	public Part getPartById(@PathVariable("id") Long id)
+	private Part getPartById(@PathVariable("id") Long id)
 	{
 		return service.getPartById(id);
 	}
@@ -38,7 +37,7 @@ public class PartController
 	
 	//region Post
 	@PostMapping("/")
-	public void addPart(@RequestBody Part part)
+	private void addPart(@RequestBody Part part)
 	{
 		service.addPart(part);
 	}
@@ -46,14 +45,14 @@ public class PartController
 	
 	//region Put
 	@PutMapping("/{id}")
-	public void editPart(@RequestBody Part part, @PathVariable("id") Long id)
+	private void editPart(@RequestBody Part part, @PathVariable("id") Long id)
 	{
 		service.editPart(id, part);
 	}
 	//endregion
 	
 	//region Delete
-	public void deletePart(Long id)
+	private void deletePart(Long id)
 	{
 		service.deletePart(id);
 	}

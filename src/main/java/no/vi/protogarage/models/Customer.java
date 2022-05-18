@@ -55,4 +55,9 @@ public class Customer
 		this.cars = cars;
 	}
 	//endregion
+	
+	public void addCar(Car car)
+	{
+		cars.add(car);
+	}
 }

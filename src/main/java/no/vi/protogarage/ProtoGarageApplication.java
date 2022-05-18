@@ -13,6 +13,7 @@ public class ProtoGarageApplication
 	public static void main(String[] args)
 	{
 		SpringApplication.run(ProtoGarageApplication.class, args);
+		System.out.println("Running!");
 		
 		//todo Templates class verwijderen
 		

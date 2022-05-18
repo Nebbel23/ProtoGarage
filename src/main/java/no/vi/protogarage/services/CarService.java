@@ -1,6 +1,8 @@
 package no.vi.protogarage.services;
 
 import no.vi.protogarage.models.Car;
+import no.vi.protogarage.models.Labor;
+import no.vi.protogarage.models.Reparation;
 import no.vi.protogarage.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,13 @@ public class CarService
 	//region Post
 	public Car addCar(Car car)
 	{
+		return repo.save(car);
+	}
+	
+	public Car addReparationToCar(Long carId, Reparation reparation)
+	{
+		Car car = repo.findById(carId).get();
+		car.addReparation(reparation);
 		return repo.save(car);
 	}
 	//endregion
