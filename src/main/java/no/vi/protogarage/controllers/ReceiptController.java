@@ -28,7 +28,7 @@ public class ReceiptController
 		return service.getReceipt(carId);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/generated/{id}")
 	private String getGeneratedReceipt(@PathVariable("id") Long carId)
 	{
 		return service.getGeneratedReceipt(carId);
