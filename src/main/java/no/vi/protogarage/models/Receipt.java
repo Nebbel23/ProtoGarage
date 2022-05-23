@@ -12,7 +12,7 @@ public class Receipt
 	private final String GARAGE_NAME = Constants.GARAGE_NAME;
 	private final String INDENT_SPACES = Constants.INDENT_SPACES;
 	private final int STANDARD_WIDTH = Constants.STANDARD_WIDTH;	//werkt alleen met even getallen atm //todo ook voor oneven werkend maken?
-	private final int MIN_WIDTH = 36;								//todo uitzoeken wat echt min is
+	private final int MIN_WIDTH = 42;								//todo uitzoeken wat echt min is
 	private int width = STANDARD_WIDTH;                				//Dit is exclusief de |borders|
 	private Car car;
 	

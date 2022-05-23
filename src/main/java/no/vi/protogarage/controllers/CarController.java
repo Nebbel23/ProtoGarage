@@ -15,7 +15,6 @@ import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 @RequestMapping(PATH_PREFIX + "/car")
 public class CarController
 {
-	
 	private final CarService service;
 	
 	@Autowired

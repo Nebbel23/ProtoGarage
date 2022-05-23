@@ -15,7 +15,6 @@ public class ProtoGarageApplication
 		
 		//TODO Bonnetje implementeren!!
 		
-		
 		//TODO Verwijderen
 		
 		//Todo //e7ba5601-88d2-4420-b877-fbf7c808edc1
