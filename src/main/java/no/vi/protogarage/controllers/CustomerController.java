@@ -37,7 +37,7 @@ public class CustomerController
 	//endregion
 	
 	//region Post
-	@PostMapping("/")
+	@PostMapping
 	private void addCustomer(@RequestBody Customer customer)
 	{
 		service.addCustomer(customer);

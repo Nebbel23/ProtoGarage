@@ -38,7 +38,7 @@ public class CarController
 	//endregion
 	
 	//region Post
-	@PostMapping("/")
+	@PostMapping
 	private Car addCar(@RequestBody Car car)
 	{
 		return service.addCar(car);

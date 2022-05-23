@@ -1,7 +1,10 @@
 package no.vi.protogarage.models;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@NoArgsConstructor
 @Entity
 @Table(name = "parts")
 public class Part
@@ -16,7 +19,7 @@ public class Part
 	private int cost;
 	
 	//todo weghalen wanneer service werkt
-	public Part() {}
+	//public Part() {}
 	
 	public Part(String name, int cost)
 	{

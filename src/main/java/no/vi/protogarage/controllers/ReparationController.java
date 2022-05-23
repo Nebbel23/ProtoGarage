@@ -37,7 +37,7 @@ public class ReparationController
 	//endregion
 	
 	//region Post
-	@PostMapping("/")
+	@PostMapping
 	private void addReparation(@RequestBody Reparation reparation)
 	{
 		service.addReparation(reparation);

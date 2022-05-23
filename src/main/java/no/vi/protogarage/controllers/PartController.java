@@ -36,7 +36,7 @@ public class PartController
 	//endregion
 	
 	//region Post
-	@PostMapping("/")
+	@PostMapping
 	private void addPart(@RequestBody Part part)
 	{
 		service.addPart(part);

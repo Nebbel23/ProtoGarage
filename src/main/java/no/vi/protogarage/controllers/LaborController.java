@@ -37,7 +37,7 @@ public class LaborController
 	//endregion
 	
 	//region Post
-	@PostMapping("/")
+	@PostMapping
 	private Labor addLabor(@RequestBody Labor labor)
 	{
 		return service.addLabor(labor);
