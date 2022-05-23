@@ -34,7 +34,7 @@ public class Reparation
 	@Column(nullable = false)
 	private boolean done = false;
 	@Column
-	@ManyToMany//(cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER)//(cascade = CascadeType.PERSIST)
 	private List<Labor> labor = new ArrayList<Labor>();
 	
 	public void addLabor(Labor l)

@@ -11,30 +11,32 @@ public class Receipt
 	//todo finals ergens neerzetten
 	private final String GARAGE_NAME = Constants.GARAGE_NAME;
 	private final String INDENT_SPACES = Constants.INDENT_SPACES;
-	private final int STANDARD_WIDTH = Constants.STANDARD_WIDTH;	//werkt alleen met even getallen atm //todo ook voor oneven werkend maken?
-	private final int MIN_WIDTH = 42;								//todo uitzoeken wat echt min is
-	private int width = STANDARD_WIDTH;                				//Dit is exclusief de |borders|
+	private final int STANDARD_WIDTH = Constants.STANDARD_WIDTH;    //werkt alleen met even getallen atm //todo ook voor oneven werkend maken?
+	private final int MIN_WIDTH = 42;                                //todo uitzoeken wat echt min is
+	private int width = STANDARD_WIDTH;                                //Dit is exclusief de |borders|
 	private Car car;
 	
 	public Receipt(Car car)
 	{
 		this.car = car;
+		
+		if (width % 2 > 0)
+			width++;
 	}
 	
 	public Receipt(Car car, int width)
 	{
 		this.car = car;
 		
+		if (width % 2 > 0)
+			width++;
+		
 		if (width < MIN_WIDTH)
-		{
 			this.width = MIN_WIDTH;
-			//todo throw exception over te kleine width
-		}
 		else
 			this.width = width;
 	}
 	
-	//todo ergens kijken wanneer part dubbel is? waarom eigenlijk? print gewoon 2 keer. maak eerst je andere shit eens niels
 	public String generate()
 	{
 		String r = "";
@@ -43,8 +45,7 @@ public class Receipt
 		r += whiteLine();
 		r += centerLine(GARAGE_NAME);
 		r += whiteLine();
-		r += dashLine();
-		r += centerLine("abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890");
+		r += centerLine("De geautomatiseerde autospeciaalzaak");
 		r += whiteLine();
 		r += whiteLine();
 		r += dashLine();
@@ -55,11 +56,30 @@ public class Receipt
 			r += printReparation(reparation);
 		
 		//todo totaal toevoegen
-		r+=whiteLine();
-		
+		r += whiteLine();
+		r += dashLine();
+		r += justifyLine("Totaal excl. BTW", toEuro(calcPriceWithoutVAT(car)));
+		r += justifyLine("BTW", toEuro(calcVAT(car)));
+		r += justifyLine("Totaal", toEuro(calcPriceWithoutVAT(car) + calcVAT(car)));
+		r += whiteLine();
 		r += endLine();
 		
 		return r;
+	}
+	
+	public int calcPriceWithoutVAT(Car car)
+	{
+		int cost = 0;
+		
+		for (Reparation r : car.getReparations())
+			cost += r.getCost();
+		
+		return cost;
+	}
+	
+	public int calcVAT(Car car)
+	{
+		return (int) Math.round(calcPriceWithoutVAT(car) * 0.21);
 	}
 	
 	public String printReparation(Reparation reparation)
@@ -101,12 +121,12 @@ public class Receipt
 			int totalSpace = width - s.length();
 			
 			retString += "|";
-			for (int i = 0; i < Math.floor(totalSpace / 2); i++)    					//Links padden
+			for (int i = 0; i < Math.floor(totalSpace / 2); i++)                        //Links padden
 				retString += " ";
 			retString += s;
-			for (int i = 0 - (totalSpace % 2); i < Math.floor(totalSpace / 2); i++)		//Rechts padden
-				retString += " ";														//Maar voegt extra spatie toe als woord oneven aantal karakters is
-
+			for (int i = 0 - (totalSpace % 2); i < Math.floor(totalSpace / 2); i++)        //Rechts padden
+				retString += " ";                                                        //Voegt extra spatie toe als woord oneven aantal karakters is
+			
 			retString += "|\n";
 		}
 		
@@ -150,21 +170,21 @@ public class Receipt
 			retString += "| " + indentedString;
 			if (i == 0)
 			{
-				for (int j = 0; j < width - indentedString.length() - rightString.length() - 2; j++)	//-2 omdat een spatie tussen leftString en rightString EN aan het begin al een spatie komt tussen | en indentedString
+				for (int j = 0; j < width - indentedString.length() - rightString.length() - 2; j++)    //-2 omdat een spatie tussen leftString en rightString EN aan het begin al een spatie komt tussen | en indentedString
 					retString += " ";
 				retString += rightString + " ";
 			}
 			else
-				for (int j = 0; j < width - indentedString.length() - 1; j++)							//-1 omdat aan het begin al een spatie komt tussen | en indentedString
+				for (int j = 0; j < width - indentedString.length() - 1; j++)                            //-1 omdat aan het begin al een spatie komt tussen | en indentedString
 					retString += " ";
-				
+			
 			retString += "|\n";
 		}
 		
 		return retString;
 	}
 	
-	private String whiteLine()
+	private String whiteLine()        //
 	{
 		String line = "|";
 		for (int i = 0; i < width; i++)
@@ -175,9 +195,9 @@ public class Receipt
 		return line;
 	}
 	
-	private String dashLine()
+	private String dashLine()        //   -------------
 	{
-		int whiteSpacePerSide = 3;					//Hoe veel spaties aan padding per kant
+		int whiteSpacePerSide = 3;   //Hoe veel spaties aan padding per kant
 		
 		String line = "";
 		for (int i = 0; i <= width - (whiteSpacePerSide * 2); i++)
@@ -186,7 +206,7 @@ public class Receipt
 		return centerLine(line);
 	}
 	
-	private String endLine()
+	private String endLine()        // +---------------+
 	{
 		String line = "+";
 		for (int i = 0; i < width; i++)
@@ -202,7 +222,7 @@ public class Receipt
 		return "€" + String.format("%.2f", (double) cents / 100);
 	}
 	
-	private String indent(int indents, String string)		//Voegt per indent twee spaties toe links van de String
+	private String indent(int indents, String string)        //Voegt per indent twee spaties toe links van de String
 	{
 		String retString = "";
 		for (int i = 0; i < indents; i++)
@@ -212,7 +232,7 @@ public class Receipt
 	
 	private ArrayList<String> splitStringToLenght(String string, int length)
 	{
-		ArrayList<String> splitStrings = new ArrayList<String>();			//Hier worden strings opgesplitst als ze breder zijn dan het vak (= breedte bonnetje - bedrag)
+		ArrayList<String> splitStrings = new ArrayList<String>();            //Hier worden strings opgesplitst als ze breder zijn dan het vak (= breedte bonnetje - bedrag)
 		
 		for (int i = 0; i <= string.length(); i += length)
 			splitStrings.add(string.substring(i, Math.min(string.length(), i + length)));

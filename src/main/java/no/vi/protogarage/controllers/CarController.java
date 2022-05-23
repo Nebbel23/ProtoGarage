@@ -35,6 +35,12 @@ public class CarController
 	{
 		return service.getCarById(id);
 	}
+	
+	@GetMapping("/cancel/{id}")
+	private Car setExecuteStatus(@PathVariable("id") Long id)
+	{
+		return service.setExecuteStatus(id, false);
+	}
 	//endregion
 	
 	//region Post
@@ -44,6 +50,7 @@ public class CarController
 		return service.addCar(car);
 	}
 	
+	@PostMapping("/{id}")
 	private Car addReparationToCar(@PathVariable("id") Long id, @RequestBody Reparation reparation)
 	{
 		return service.addReparationToCar(id, reparation);

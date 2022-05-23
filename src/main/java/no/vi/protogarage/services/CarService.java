@@ -1,7 +1,6 @@
 package no.vi.protogarage.services;
 
 import no.vi.protogarage.models.Car;
-import no.vi.protogarage.models.Labor;
 import no.vi.protogarage.models.Reparation;
 import no.vi.protogarage.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +38,13 @@ public class CarService
 		car.addReparation(reparation);
 		return repo.save(car);
 	}
+	
+	public Car setExecuteStatus(long id, boolean executeStatus)
+	{
+		Car car = repo.findById(id).get();
+		car.setExecuteStatus(executeStatus);
+		return repo.save(car);
+	}
 	//endregion
 	
 	//region Put
@@ -50,6 +56,7 @@ public class CarService
 						{
 							car.setRegistration(c.getRegistration());
 							car.setReparations(c.getReparations());
+							car.setExecuteStatus(c.isExecuteStatus());
 							car.setAtShop(c.isAtShop());
 							car.setPayed(c.isPayed());
 							

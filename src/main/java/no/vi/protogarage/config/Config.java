@@ -118,8 +118,8 @@ public class Config
 			repo.save(kia);
 			repo.save(ford);
 			
-			Receipt receipt = new Receipt(carService.getCarById(1l));
-			//System.out.println(receipt.generate());
+			Receipt receipt = new Receipt(car);//carService.getCarById(1l));
+			System.out.println(receipt.generate());
 		};
 	}
 	

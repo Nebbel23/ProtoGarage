@@ -16,6 +16,8 @@ public class Car
 	@Column(nullable = false)
 	private String registration;
 	@Column(nullable = false)
+	private boolean executeStatus = true;
+	@Column(nullable = false)
 	private boolean atShop = false;
 	@Column(nullable = false)
 	private boolean payed = false;
@@ -37,6 +39,16 @@ public class Car
 	public void setRegistration(String registration)
 	{
 		this.registration = registration;
+	}
+	
+	public boolean isExecuteStatus()
+	{
+		return executeStatus;
+	}
+	
+	public void setExecuteStatus(boolean executeStatus)
+	{
+		this.executeStatus = executeStatus;
 	}
 	
 	public boolean isAtShop()
