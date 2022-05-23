@@ -4,14 +4,16 @@ import no.vi.protogarage.config.Constants;
 
 import java.util.ArrayList;
 
+//TODO BTW TOEVOEGEN
+//TODO afmaken
 public class Receipt
 {
-	//todo fnials ergens neerzetten
+	//todo finals ergens neerzetten
 	private final String GARAGE_NAME = Constants.GARAGE_NAME;
 	private final String INDENT_SPACES = Constants.INDENT_SPACES;
 	private final int STANDARD_WIDTH = Constants.STANDARD_WIDTH;	//werkt alleen met even getallen atm //todo ook voor oneven werkend maken?
-	private final int MIN_WIDTH = 36;		//todo uitzoeken wat echt min is
-	private int width = STANDARD_WIDTH;                		//Dit is exclusief de |borders|
+	private final int MIN_WIDTH = 36;								//todo uitzoeken wat echt min is
+	private int width = STANDARD_WIDTH;                				//Dit is exclusief de |borders|
 	private Car car;
 	
 	public Receipt(Car car)
@@ -48,6 +50,7 @@ public class Receipt
 		r += dashLine();
 		r += whiteLine();
 		
+		//TODO Hier gaat iets fout
 		for (Reparation reparation : car.getReparations())
 			r += printReparation(reparation);
 		

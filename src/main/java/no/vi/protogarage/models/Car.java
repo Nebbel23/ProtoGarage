@@ -2,6 +2,7 @@ package no.vi.protogarage.models;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,8 +20,8 @@ public class Car
 	@Column(nullable = false)
 	private boolean payed = false;
 	@Column
-	@OneToMany
-	private List<Reparation> reparations;// = new List<Reparation>(); //ArrayList<Reparation>();
+	@OneToMany(cascade = CascadeType.PERSIST)
+	private List<Reparation> reparations = new ArrayList<Reparation>(); //ArrayList<Reparation>();
 	
 	//todo pdf reader ding
 	private String papers;
@@ -64,13 +65,8 @@ public class Car
 	}
 	//endregion
 	
-	public void addReparation(Reparation r)
+	public void addReparation(Reparation reparation)
 	{
-		reparations.add(r);
-	}
-	
-	public void delReparation(Reparation r)
-	{
-		reparations.remove(r);
+		reparations.add(reparation);
 	}
 }

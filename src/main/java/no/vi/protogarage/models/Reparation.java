@@ -11,6 +11,19 @@ import java.util.List;
 @NoArgsConstructor
 public class Reparation
 {
+	//TODO Kiezen tussen ID generators
+	
+//	@Id
+//	@SequenceGenerator(
+//			name = "user_sequence",
+//			sequenceName = "user_sequence",
+//			allocationSize = 1
+//	)
+//
+//	@GeneratedValue(
+//			strategy = GenerationType.SEQUENCE,
+//			generator = "user_sequence"
+//	)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false, name = "id")
@@ -20,7 +33,7 @@ public class Reparation
 	@Column(nullable = false)
 	private boolean done = false;
 	@Column
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Labor> labor = new ArrayList<Labor>();
 	
 	public void addLabor(Labor l)

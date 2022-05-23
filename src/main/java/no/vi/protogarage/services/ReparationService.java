@@ -1,7 +1,6 @@
 package no.vi.protogarage.services;
 
 import no.vi.protogarage.models.Labor;
-import no.vi.protogarage.models.Part;
 import no.vi.protogarage.models.Reparation;
 import no.vi.protogarage.repositories.ReparationRepository;
 import org.springframework.beans.factory.annotation.Autowired;

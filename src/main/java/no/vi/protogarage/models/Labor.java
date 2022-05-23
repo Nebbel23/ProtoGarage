@@ -27,7 +27,7 @@ public class Labor
 	@Column
 	private int fixedPriceCost;
 	@Column
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Part> parts = new ArrayList<Part>();
 	
 	private int costPerHour = Constants.COST_PER_HOUR;

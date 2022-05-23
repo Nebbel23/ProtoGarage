@@ -29,8 +29,6 @@ public class CarController
 		return service.getAllCars();
 	}
 	
-	//todo .get()
-	//todo public maken
 	@GetMapping("/{id}")
 	private Car getCarById(@PathVariable("id") Long id)
 	{

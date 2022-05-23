@@ -2,14 +2,11 @@ package no.vi.protogarage.controllers;
 
 import no.vi.protogarage.models.Car;
 import no.vi.protogarage.models.Customer;
-import no.vi.protogarage.models.Labor;
-import no.vi.protogarage.models.Part;
 import no.vi.protogarage.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 

@@ -28,7 +28,6 @@ public class Config
 	private final ReparationService reparationService;
 	private final CarService carService;
 	
-	
 	@Bean
 	CommandLineRunner partCommandLineRunner(PartRepository repo)
 	{
@@ -45,8 +44,6 @@ public class Config
 			repo.save(wiper);
 		};
 	}
-	
-	
 	
 	@Bean
 	CommandLineRunner laborCommandLineRunner(LaborRepository repo)
@@ -72,14 +69,14 @@ public class Config
 		return args ->
 		{
 			Reparation inspectionReparation = new Reparation("Inspectie");
-			//inspectionReparation.addLabor(inspection);
+			inspectionReparation.addLabor(laborService.getLaborById(1l));
 			
 			Reparation replaceWiper = new Reparation("Ruitenwisser vervangen");
-			//replaceWiper.addLabor(wiperLabor);
+			replaceWiper.addLabor(laborService.getLaborById(2l));
 			
 			Reparation replaceFrontBrakeDiscs = new Reparation("Remschijven voor vervangen");
-			//replaceFrontBrakeDiscs.addLabor(brakeDiscLabor);
-			//replaceFrontBrakeDiscs.addLabor(brakeDiscLabor);
+			replaceFrontBrakeDiscs.addLabor(laborService.getLaborById(3l));
+			//replaceFrontBrakeDiscs.addLabor(laborService.getLaborById(3l));
 			
 			repo.save(inspectionReparation);
 			repo.save(replaceWiper);
@@ -92,13 +89,19 @@ public class Config
 	{
 		return args ->
 		{
-			//Car car = new Car();
-			//car.addReparation(inspectionReparation);
-			//car.addReparation(replaceWiper);
-			//car.addReparation(replaceFrontBrakeDiscs);
-			//car.addReparation(tempReparation);
+			Car car = new Car();
+			car.setRegistration("NF-XN-02");
+			car.setPayed(false);
+			car.setAtShop(true);
 			
-			//repo.save(car);
+			car.addReparation(reparationService.getReparationById(1l));
+			car.addReparation(reparationService.getReparationById(2l));
+			car.addReparation(reparationService.getReparationById(3l));
+			
+			repo.save(car);
+			
+			Receipt receipt = new Receipt(carService.getCarById(1l));
+			//System.out.println(receipt.generate());
 		};
 	}
 	

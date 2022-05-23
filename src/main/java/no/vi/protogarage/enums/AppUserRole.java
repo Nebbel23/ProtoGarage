@@ -1,10 +1,11 @@
 package no.vi.protogarage.enums;
 
-//todo rollen bepalen
+
+//TODO IMPLEMENTEREN
 public enum AppUserRole
 {
 	ADMIN,
-	MECHANIC,
+	BACKOFFICE,
 	CASHIER,
-	BACKOFFICE
+	MECHANIC
 }
