@@ -76,7 +76,7 @@ public class Config
 			
 			Reparation replaceFrontBrakeDiscs = new Reparation("Remschijven voor vervangen");
 			replaceFrontBrakeDiscs.addLabor(laborService.getLaborById(3l));
-			//replaceFrontBrakeDiscs.addLabor(laborService.getLaborById(3l));
+			replaceFrontBrakeDiscs.addLabor(laborService.getLaborById(3l));
 			
 			repo.save(inspectionReparation);
 			repo.save(replaceWiper);
@@ -98,7 +98,25 @@ public class Config
 			car.addReparation(reparationService.getReparationById(2l));
 			car.addReparation(reparationService.getReparationById(3l));
 			
+			Car kia = new Car();
+			kia.setRegistration("16-SJ-PZ");
+			kia.setPayed(false);
+			kia.setAtShop(true);
+			
+			kia.addReparation(reparationService.getReparationById(2l));
+			
+			Car ford = new Car();
+			ford.setRegistration("74-JZB-9");
+			ford.setPayed(true);
+			ford.setAtShop(false);
+			
+			ford.addReparation(reparationService.getReparationById(1l));
+			ford.addReparation(reparationService.getReparationById(3l));
+			
+			//TODO hier gaat iets grondig mis
 			repo.save(car);
+			repo.save(kia);
+			repo.save(ford);
 			
 			Receipt receipt = new Receipt(carService.getCarById(1l));
 			//System.out.println(receipt.generate());

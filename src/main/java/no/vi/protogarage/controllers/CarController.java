@@ -1,6 +1,8 @@
 package no.vi.protogarage.controllers;
 
 import no.vi.protogarage.models.Car;
+import no.vi.protogarage.models.Customer;
+import no.vi.protogarage.models.Reparation;
 import no.vi.protogarage.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,11 @@ public class CarController
 	{
 		return service.addCar(car);
 	}
+	
+	private Car addReparationToCar(@PathVariable("id") Long id, @RequestBody Reparation reparation)
+	{
+		return service.addReparationToCar(id, reparation);
+	}
 	//endregion
 	
 	//region Put
@@ -53,8 +60,8 @@ public class CarController
 	//endregion
 	
 	//region Delete
-	@DeleteMapping
-	private void deleteCar(Long id)
+	@DeleteMapping("/{id}")
+	private void deleteCar(@PathVariable("id") Long id)
 	{
 		service.deleteCar(id);
 	}

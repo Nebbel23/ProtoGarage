@@ -59,7 +59,8 @@ public class CustomerController
 	//endregion
 	
 	//region Delete
-	private void deleteCustomer(Long id)
+	@DeleteMapping("/{id}")
+	private void deleteCustomer(@PathVariable("id") Long id)
 	{
 		service.deleteCustomer(id);
 	}

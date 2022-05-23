@@ -59,7 +59,8 @@ public class ReparationController
 	//endregion
 	
 	//region Delete
-	private void deleteReparation(Long id)
+	@DeleteMapping("/{id}")
+	private void deleteReparation(@PathVariable("id") Long id)
 	{
 		service.deleteReparation(id);
 	}

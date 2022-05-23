@@ -59,7 +59,8 @@ public class LaborController
 	//endregion
 	
 	//region Delete
-	private void deleteLabor(Long id)
+	@DeleteMapping("/{id}")
+	private void deleteLabor(@PathVariable("id") Long id)
 	{
 		service.deleteLabor(id);
 	}

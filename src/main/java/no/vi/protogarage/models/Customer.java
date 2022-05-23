@@ -16,7 +16,7 @@ public class Customer
 	@Column(nullable = false)
 	private String phoneNr;
 	@Column
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany//(cascade = CascadeType.PERSIST)
 	private List<Car> cars;
 	
 	//region Getters & setters

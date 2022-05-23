@@ -52,7 +52,8 @@ public class PartController
 	//endregion
 	
 	//region Delete
-	private void deletePart(Long id)
+	@DeleteMapping("/{id}")
+	private void deletePart(@PathVariable("id") Long id)
 	{
 		service.deletePart(id);
 	}

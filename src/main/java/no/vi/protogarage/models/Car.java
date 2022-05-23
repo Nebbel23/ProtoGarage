@@ -20,11 +20,13 @@ public class Car
 	@Column(nullable = false)
 	private boolean payed = false;
 	@Column
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany//(cascade = CascadeType.PERSIST)//TODO checken of weghalen
 	private List<Reparation> reparations = new ArrayList<Reparation>(); //ArrayList<Reparation>();
 	
 	//todo pdf reader ding
 	private String papers;
+	
+	//TODO NIET_UITVOEREN BOOL IMPLEMENTEREN
 	
 	//region Getters & setters
 	public String getRegistration()

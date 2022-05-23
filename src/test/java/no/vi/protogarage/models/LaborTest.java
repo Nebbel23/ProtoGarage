@@ -14,6 +14,7 @@ class LaborTest
 	{
 		assertEquals(0, (new Labor()).getCost());
 		assertEquals(0, (new Labor()).getCost());
+		assertEquals(0, (new Labor()).getCost());
 	}
 }
 
