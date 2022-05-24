@@ -23,7 +23,7 @@ public class Car
 	private boolean payed = false;
 	@Column
 	@ManyToMany//(cascade = CascadeType.PERSIST)//TODO checken of weghalen
-	private List<Reparation> reparations = new ArrayList<Reparation>(); //ArrayList<Reparation>();
+	private List<Reparation> reparations = new ArrayList<Reparation>();
 	
 	//todo pdf reader ding
 	private String papers;

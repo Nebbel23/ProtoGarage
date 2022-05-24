@@ -35,6 +35,7 @@ public class ReceiptController
 	}
 
 	//TODO DOWNLOADER VOOR RECEIPT
+	//TODO DIT WEGHALEN
 	
 	/*
 	https://stackoverflow.com/questions/35680932/download-a-file-from-spring-boot-rest-service

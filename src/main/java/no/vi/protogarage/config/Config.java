@@ -7,7 +7,6 @@ import no.vi.protogarage.repositories.*;
 import no.vi.protogarage.security.PasswordEncoder;
 
 import lombok.AllArgsConstructor;
-import no.vi.protogarage.services.CarService;
 import no.vi.protogarage.services.LaborService;
 import no.vi.protogarage.services.PartService;
 import no.vi.protogarage.services.ReparationService;
@@ -24,7 +23,6 @@ public class Config
 	private final PartService partService;
 	private final LaborService laborService;
 	private final ReparationService reparationService;
-	private final CarService carService;
 	
 	@Bean
 	CommandLineRunner partCommandLineRunner(PartRepository repo)
@@ -87,14 +85,14 @@ public class Config
 	{
 		return args ->
 		{
-			Car car = new Car();
-			car.setRegistration("NF-XN-02");
-			car.setPayed(false);
-			car.setAtShop(true);
+			Car mitsubishi = new Car();
+			mitsubishi.setRegistration("NF-XN-02");
+			mitsubishi.setPayed(false);
+			mitsubishi.setAtShop(true);
 			
-			car.addReparation(reparationService.getReparationById(1l));
-			car.addReparation(reparationService.getReparationById(2l));
-			car.addReparation(reparationService.getReparationById(3l));
+			mitsubishi.addReparation(reparationService.getReparationById(1l));
+			mitsubishi.addReparation(reparationService.getReparationById(2l));
+			mitsubishi.addReparation(reparationService.getReparationById(3l));
 			
 			Car kia = new Car();
 			kia.setRegistration("16-SJ-PZ");
@@ -111,12 +109,12 @@ public class Config
 			ford.addReparation(reparationService.getReparationById(1l));
 			ford.addReparation(reparationService.getReparationById(3l));
 			
-			repo.save(car);
+			repo.save(mitsubishi);
 			repo.save(kia);
 			repo.save(ford);
 			
 			//todo weghalen
-			Receipt receipt = new Receipt(car);//carService.getCarById(1l));
+			Receipt receipt = new Receipt(mitsubishi);//carService.getCarById(1l));
 			System.out.println(receipt.generate());
 		};
 	}

@@ -1,7 +1,6 @@
 package no.vi.protogarage.controllers;
 
 import no.vi.protogarage.models.Car;
-import no.vi.protogarage.models.Customer;
 import no.vi.protogarage.models.Reparation;
 import no.vi.protogarage.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
