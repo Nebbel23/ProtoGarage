@@ -15,8 +15,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Objects;
-
 @AllArgsConstructor
 @Configuration
 public class Config
@@ -113,11 +111,11 @@ public class Config
 			ford.addReparation(reparationService.getReparationById(1l));
 			ford.addReparation(reparationService.getReparationById(3l));
 			
-			//TODO hier gaat iets grondig mis
 			repo.save(car);
 			repo.save(kia);
 			repo.save(ford);
 			
+			//todo weghalen
 			Receipt receipt = new Receipt(car);//carService.getCarById(1l));
 			System.out.println(receipt.generate());
 		};
@@ -128,11 +126,15 @@ public class Config
 	{
 		return args ->
 		{
-			//todo UserRoles toevoegen
-			AppUser admin = new AppUser("Niels", "admin", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.ADMIN, false, true);
-			AppUser appUser = new AppUser("Rick", "mechanic", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.MECHANIC, false, true);
+			AppUser admin = new AppUser("Niels", "admin", encoder.bCryptPasswordEncoder().encode("root"), AppUserRole.ADMIN, false, true);
+			AppUser backoffice = new AppUser("Alice", "backoffice", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.BACKOFFICE, false, true);
+			AppUser cashier = new AppUser("Anthonie", "cashier", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.CASHIER, false, true);
+			AppUser mechanic = new AppUser("Rick", "mechanic", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.MECHANIC, false, true);
+			
 			appUserRepository.save(admin);
-			appUserRepository.save(appUser);
+			appUserRepository.save(backoffice);
+			appUserRepository.save(cashier);
+			appUserRepository.save(mechanic);
 		};
 	}
 }

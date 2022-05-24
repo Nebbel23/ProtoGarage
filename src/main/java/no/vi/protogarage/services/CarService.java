@@ -60,8 +60,6 @@ public class CarService
 							car.setAtShop(c.isAtShop());
 							car.setPayed(c.isPayed());
 							
-							//todo papers
-							
 							return repo.save(car);
 						}
 				).orElseGet(() ->

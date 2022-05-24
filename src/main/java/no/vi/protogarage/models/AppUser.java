@@ -37,7 +37,6 @@ public class AppUser implements UserDetails
 	private String name;
 	private String username;
 	private String password;
-	private String email;							//todo weghalen, weghalen in repo
 	@Enumerated(EnumType.STRING)
 	private AppUserRole appUserRole;
 	private boolean locked;							//todo hoofdletter Boolean

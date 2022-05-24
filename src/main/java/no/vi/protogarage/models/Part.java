@@ -18,9 +18,6 @@ public class Part
 	@Column
 	private int cost;
 	
-	//todo weghalen wanneer service werkt
-	//public Part() {}
-	
 	public Part(String name, int cost)
 	{
 		this.name = name;
@@ -40,7 +37,6 @@ public class Part
 	
 	public int getCost()
 	{
-		//todo cost implementeren
 		return cost;
 	}
 	

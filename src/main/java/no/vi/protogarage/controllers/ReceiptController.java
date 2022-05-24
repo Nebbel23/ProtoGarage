@@ -34,6 +34,7 @@ public class ReceiptController
 		return service.getGeneratedReceipt(carId);
 	}
 
+	//TODO DOWNLOADER VOOR RECEIPT
 	
 	/*
 	https://stackoverflow.com/questions/35680932/download-a-file-from-spring-boot-rest-service

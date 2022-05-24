@@ -28,8 +28,6 @@ public class Car
 	//todo pdf reader ding
 	private String papers;
 	
-	//TODO NIET_UITVOEREN BOOL IMPLEMENTEREN
-	
 	//region Getters & setters
 	public String getRegistration()
 	{

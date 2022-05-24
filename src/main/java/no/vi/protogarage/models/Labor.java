@@ -101,8 +101,6 @@ public class Labor
 		fixedPriceCost = cost;
 	}
 	
-	//todo unsetFixedPrice?
-	
 	public void addPart(Part p)
 	{
 		parts.add(p);

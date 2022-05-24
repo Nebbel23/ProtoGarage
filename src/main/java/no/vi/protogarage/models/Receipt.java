@@ -4,15 +4,12 @@ import no.vi.protogarage.config.Constants;
 
 import java.util.ArrayList;
 
-//TODO BTW TOEVOEGEN
-//TODO afmaken
 public class Receipt
 {
-	//todo finals ergens neerzetten
 	private final String GARAGE_NAME = Constants.GARAGE_NAME;
 	private final String INDENT_SPACES = Constants.INDENT_SPACES;
-	private final int STANDARD_WIDTH = Constants.STANDARD_WIDTH;    //werkt alleen met even getallen atm //todo ook voor oneven werkend maken?
-	private final int MIN_WIDTH = 42;                                //todo uitzoeken wat echt min is
+	private final int STANDARD_WIDTH = Constants.STANDARD_WIDTH;
+	private final int MIN_WIDTH = 42;
 	private int width = STANDARD_WIDTH;                                //Dit is exclusief de |borders|
 	private Car car;
 	
@@ -37,10 +34,12 @@ public class Receipt
 			this.width = width;
 	}
 	
+	//Maakt het bonnentje
 	public String generate()
 	{
 		String r = "";
 		
+		r += whiteLine();
 		r += endLine();
 		r += whiteLine();
 		r += centerLine(GARAGE_NAME);
@@ -51,11 +50,9 @@ public class Receipt
 		r += dashLine();
 		r += whiteLine();
 		
-		//TODO Hier gaat iets fout
 		for (Reparation reparation : car.getReparations())
 			r += printReparation(reparation);
 		
-		//todo totaal toevoegen
 		r += whiteLine();
 		r += dashLine();
 		r += justifyLine("Totaal excl. BTW", toEuro(calcPriceWithoutVAT(car)));
@@ -84,7 +81,6 @@ public class Receipt
 	
 	public String printReparation(Reparation reparation)
 	{
-		//todo totaalprijs repair toevoegen
 		String retString = justifyLine(reparation.getName(), toEuro(reparation.getCost()));
 		
 		for (Labor l : reparation.getLabor())
@@ -114,7 +110,7 @@ public class Receipt
 	{
 		String retString = "";
 		
-		ArrayList<String> splitStrings = splitStringToLenght(toCenter, width - 2);
+		ArrayList<String> splitStrings = splitStringToLength(toCenter, width - 2);
 		
 		for (String s : splitStrings)
 		{
@@ -152,18 +148,8 @@ public class Receipt
 	{
 		String retString = "";
 		
-		ArrayList<String> splitStrings = splitStringToLenght(indent(indents, leftString), width - rightString.length() - 3);
+		ArrayList<String> splitStrings = splitStringToLength(indent(indents, leftString), width - rightString.length() - 3);
 		
-		whiteLine();
-		whiteLine();
-		whiteLine();
-		for (String s : splitStrings)
-			System.out.println(s);
-		whiteLine();
-		whiteLine();
-		whiteLine();
-		
-		//todo splitstrings
 		for (int i = 0; i < splitStrings.size(); i++)
 		{
 			String indentedString = indent(indents, splitStrings.get(i));
@@ -222,7 +208,7 @@ public class Receipt
 		return "€" + String.format("%.2f", (double) cents / 100);
 	}
 	
-	private String indent(int indents, String string)        //Voegt per indent twee spaties toe links van de String
+	private String indent(int indents, String string)        			//Voegt per indent twee spaties toe links van de String
 	{
 		String retString = "";
 		for (int i = 0; i < indents; i++)
@@ -230,9 +216,9 @@ public class Receipt
 		return retString + string;
 	}
 	
-	private ArrayList<String> splitStringToLenght(String string, int length)
+	private ArrayList<String> splitStringToLength(String string, int length)
 	{
-		ArrayList<String> splitStrings = new ArrayList<String>();            //Hier worden strings opgesplitst als ze breder zijn dan het vak (= breedte bonnetje - bedrag)
+		ArrayList<String> splitStrings = new ArrayList<String>();       //Hier worden strings opgesplitst als ze breder zijn dan het vak (= breedte bonnetje - bedrag)
 		
 		for (int i = 0; i <= string.length(); i += length)
 			splitStrings.add(string.substring(i, Math.min(string.length(), i + length)));
@@ -240,62 +226,3 @@ public class Receipt
 		return splitStrings;
 	}
 }
-
-/*
-
-+-----------------------------------------+	X
-|                                         |	X
-|                 VONS                    |	X
-|                                         | X
-|           Welcome To Our Store          | X
-|                                         | X
-|   6 @ 5/1.00 Top Ramen          1.20 F  |
-|    6 @ .10                              |
-|  SC 3339 Club Nissin Top Ra      .60-F  |
-|  2@.00   Italian Seasn          1.98 F  |
-|          LCN 32Z Mex            6.49 F  |
-|  SC 3210 Club Lucerne Chees     1.50-F  |
-|          HLYWD Mayo             2.79 F  |
-|   2 @ 5/1.00                            |
-|          Top Ramen               .40 F  |
-|    2 @   10                             |
-|  SC 3339 Club Nissin To Ra       .20-F  |
-|   2 @ 5/1.00                            |
-|          Top Ramen                      |
-|    2 @ .10                              |
-|  SC 3339 Club Nissin Top Ra      .20-F  |
-|          Kikko MN Soy           1.09 F  |
-|     **** TAX        .00   BAL   11.85   |
-|          CASH                   20.00   |
-|                                         | X
-|          Change                  8.15   |
-|                                         | X
-|          Number Of Items      15        |
-|     6/02/03 19:01 2355 01 0579 7143     | X
-|                                         | X
-|   -----------------------------------   | X
-|            X2of3       3894             | X
-|   -----------------------------------   | X
-|    Club Card Savings          $  2.50   |
-|    Total Savings Value  17%   $  2.50   |
-|                                         | X
-|  You have purchased   0  of   8 toward  | X
-|        Your  1st  FREE BAGLE!!          | X
-|         See Store For Details.          | X
-|                                         | X
-|  You have purchased   0  of   7 toward  | X
-|     Your  1st  FREE DELI SANDWICH       | X
-|         See Store For Details.          | X
-|                                         | X
-|         LET US HEAR FROM YOU!           | X
-|    1-877-723-3929 or visit VONS.COM     | X
-|                                         | X
-+-----------------------------------------+ X
-
-Reparatie						VEEL
-   9 Onderdeel					 WAT
-  99 Onderdeel					 WAT
-   9  Onderdeel					 WAT
-99,5 Labor						IETS
-
- */

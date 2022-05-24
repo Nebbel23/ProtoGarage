@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Reparation
 {
-	//TODO Kiezen tussen ID generators
+//TODO Kiezen tussen ID generators
 	
 //	@Id
 //	@SequenceGenerator(

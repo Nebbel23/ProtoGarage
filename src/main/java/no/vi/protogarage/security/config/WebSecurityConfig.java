@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 				.csrf().disable()
 				.authorizeRequests()
 				
+				//TODO USERROLLEN!!!
 				//todo kijken of dit invloed heeft op /car/nogiets
 				
 				.antMatchers("/api/v*/car/**").hasAnyAuthority(AppUserRole.ADMIN.name())
