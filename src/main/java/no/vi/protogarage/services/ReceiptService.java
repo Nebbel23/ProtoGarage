@@ -1,23 +1,27 @@
 package no.vi.protogarage.services;
 
+import no.vi.protogarage.models.Car;
+import no.vi.protogarage.models.FileDB;
 import no.vi.protogarage.models.Receipt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class ReceiptService
 {
-	//TODO ALS TXT EXPORTEREN DIE RECEIPT, NONDEJU
 	@Autowired
 	CarService carService;
 	
-	public Receipt getReceipt(Long carId)
+	public ResponseEntity<byte[]> downloadReceipt(Long carId)
 	{
-		return new Receipt(carService.getCarById(carId));
-	}
-	
-	public String getGeneratedReceipt(Long carId)
-	{
-		return new Receipt(carService.getCarById(carId)).generate();
+		Receipt receipt = new Receipt(carService.getCarById(carId));
+		
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"receipt.txt\"")
+				.body(receipt.generate().getBytes(StandardCharsets.UTF_8));
 	}
 }

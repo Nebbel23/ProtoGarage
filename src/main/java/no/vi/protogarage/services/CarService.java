@@ -35,22 +35,10 @@ public class CarService
 	{
 		return carRepository.findById(id).get();
 	}
-
-//	public ResponseEntity<byte[]> getPapers(String id)
-//	{
-//		FileDB fileDB = fileDBRepository.findById(id).get();
-//		return ResponseEntity.ok()
-//				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
-//				.body(fileDB.getData());
-//
-//		//Car car = carRepository.findById(id).get();
-//		//return new byte[]; //car.getPapersPdf();
-//	}
 	
 	public ResponseEntity<byte[]> getPapers(Long id)
 	{
-		Car car = carRepository.findById(id).get();
-		String papersId = car.getPapersId();
+		String papersId = carRepository.findById(id).get().getPapersId();
 		
 		FileDB fileDB = fileDBRepository.findById(papersId).get();
 		return ResponseEntity.ok()
@@ -78,27 +66,6 @@ public class CarService
 		car.setExecuteStatus(executeStatus);
 		return carRepository.save(car);
 	}
-
-//	public ResponseEntity<ResponseMessage> uploadPapers(Long id, MultipartFile file)
-//	{
-//		Car car = carRepository.findById(id).get();
-//
-//		String message = "";
-//		try
-//		{
-//			String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//			FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
-//			car.setPapersPdf(file.getBytes());
-//			carRepository.save(car);
-//
-//			message = "Uploaded the car papers successfully: " + file.getOriginalFilename();
-//			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-//		} catch (Exception e)
-//		{
-//			message = "Could not upload the car papers: " + file.getOriginalFilename() + "!";
-//			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-//		}
-//	}
 	
 	public ResponseEntity<ResponseMessage> uploadPapers(Long id, MultipartFile file)
 	{
