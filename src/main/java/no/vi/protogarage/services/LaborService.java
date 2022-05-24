@@ -12,38 +12,38 @@ import java.util.List;
 public class LaborService
 {
 	@Autowired
-	LaborRepository repo;
+	LaborRepository laborRepository;
 	
 	//region Get
 	public List<Labor> getAllLabor()
 	{
-		return repo.findAll();
+		return laborRepository.findAll();
 	}
 	
 	public Labor getLaborById(Long id)
 	{
-		return repo.findById(id).get();
+		return laborRepository.findById(id).get();
 	}
 	//endregion
 	
 	//region Post
 	public Labor addLabor(Labor l)
 	{
-		return repo.save(l);
+		return laborRepository.save(l);
 	}
 	
 	public Labor addPartToLabor(Long laborId, Part part)
 	{
-		Labor labor = repo.findById(laborId).get();
+		Labor labor = laborRepository.findById(laborId).get();
 		labor.addPart(part);
-		return repo.save(labor);
+		return laborRepository.save(labor);
 	}
 	//endregion
 	
 	//region Put
 	public Labor editLabor(Long id, Labor l)
 	{
-		return repo.findById(id)
+		return laborRepository.findById(id)
 				.map(
 						labor ->
 						{
@@ -53,7 +53,7 @@ public class LaborService
 							labor.setDurationInMinutes(l.getDurationInMinutes());
 							labor.setFixedPriceCost(l.getFixedPriceCost());
 							
-							return repo.save(labor);
+							return laborRepository.save(labor);
 						}
 				).orElseGet(() ->
 						{
@@ -66,7 +66,7 @@ public class LaborService
 	//region Delete
 	public void deleteLabor(Long id)
 	{
-		repo.deleteById(id);
+		laborRepository.deleteById(id);
 	}
 	//endregion
 }

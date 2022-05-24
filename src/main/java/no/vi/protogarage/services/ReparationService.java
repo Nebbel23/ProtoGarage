@@ -12,38 +12,38 @@ import java.util.List;
 public class ReparationService
 {
 	@Autowired
-	ReparationRepository repo;
+	ReparationRepository reparationRepository;
 	
 	//region Get
 	public List<Reparation> getAllReparations()
 	{
-		return repo.findAll();
+		return reparationRepository.findAll();
 	}
 	
 	public Reparation getReparationById(Long id)
 	{
-		return repo.findById(id).get();
+		return reparationRepository.findById(id).get();
 	}
 	//region
 	
 	//region Post
 	public Reparation addReparation(Reparation reparation)
 	{
-		return repo.save(reparation);
+		return reparationRepository.save(reparation);
 	}
 	
 	public Reparation addLaborToReparation(Long reparationId, Labor labor)
 	{
-		Reparation reparation = repo.findById(reparationId).get();
+		Reparation reparation = reparationRepository.findById(reparationId).get();
 		reparation.addLabor(labor);
-		return repo.save(reparation);
+		return reparationRepository.save(reparation);
 	}
 	//endregion
 	
 	//region Put
 	public Reparation editReparation(Long id, Reparation r)
 	{
-		return repo.findById(id)
+		return reparationRepository.findById(id)
 				.map(
 						reparation ->
 						{
@@ -51,7 +51,7 @@ public class ReparationService
 							reparation.setLabor(r.getLabor());
 							reparation.setDone(r.isDone());
 							
-							return repo.save(reparation);
+							return reparationRepository.save(reparation);
 						}
 				).orElseGet(() ->
 						{
@@ -64,7 +64,7 @@ public class ReparationService
 	//region Delete
 	public void deleteReparation(Long id)
 	{
-		repo.deleteById(id);
+		reparationRepository.deleteById(id);
 	}
 	//endregion
 }

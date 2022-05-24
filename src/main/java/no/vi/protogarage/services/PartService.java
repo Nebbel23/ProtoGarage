@@ -11,38 +11,38 @@ import java.util.List;
 public class PartService
 {
 	@Autowired
-	PartRepository repo;
+	PartRepository partRepository;
 	
 	//region Get
 	public List<Part> getAllParts()
 	{
-		return repo.findAll();
+		return partRepository.findAll();
 	}
 	
 	public Part getPartById(Long id)
 	{
-		return repo.findById(id).get();
+		return partRepository.findById(id).get();
 	}
 	//endregion
 	
 	//region Post
 	public Part addPart(Part p)
 	{
-		return repo.save(p);
+		return partRepository.save(p);
 	}
 	//endregion
 	
 	//region Put
 	public Part editPart(Long id, Part p)
 	{
-		return repo.findById(id)
+		return partRepository.findById(id)
 				.map(
 						part ->
 						{
 							part.setName(p.getName());
 							part.setCost(p.getCost());
 							
-							return repo.save(part);
+							return partRepository.save(part);
 						}
 				).orElseGet(() ->
 						{
@@ -55,7 +55,7 @@ public class PartService
 	//region Delete
 	public void deletePart(Long id)
 	{
-		repo.deleteById(id);
+		partRepository.deleteById(id);
 	}
 	//endregion
 }

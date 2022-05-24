@@ -12,38 +12,38 @@ import java.util.List;
 public class CustomerService
 {
 	@Autowired
-	CustomerRepository repo;
+	CustomerRepository customerRepository;
 	
 	//region Get
 	public List<Customer> getAllCustomers()
 	{
-		return repo.findAll();
+		return customerRepository.findAll();
 	}
 	
 	public Customer getCustomerById(Long id)
 	{
-		return repo.findById(id).get();
+		return customerRepository.findById(id).get();
 	}
 	//region
 	
 	//region Post
 	public Customer addCustomer(Customer customer)
 	{
-		return repo.save(customer);
+		return customerRepository.save(customer);
 	}
 	
 	public Customer addCarToCustomer(Long customerId, Car car)
 	{
-		Customer customer = repo.findById(customerId).get();
+		Customer customer = customerRepository.findById(customerId).get();
 		customer.addCar(car);
-		return repo.save(customer);
+		return customerRepository.save(customer);
 	}
 	//endregion
 	
 	//region Put
 	public Customer editCustomer(Long id, Customer c)
 	{
-		return repo.findById(id)
+		return customerRepository.findById(id)
 				.map(
 						customer ->
 						{
@@ -51,7 +51,7 @@ public class CustomerService
 							customer.setPhoneNr(c.getPhoneNr());
 							customer.setCars(c.getCars());
 							
-							return repo.save(customer);
+							return customerRepository.save(customer);
 						}
 				).orElseGet(() ->
 						{
@@ -64,7 +64,7 @@ public class CustomerService
 	//region Delete
 	public void deleteCustomer(Long id)
 	{
-		repo.deleteById(id);
+		customerRepository.deleteById(id);
 	}
 	//endregion
 }

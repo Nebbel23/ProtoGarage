@@ -12,45 +12,45 @@ import java.util.List;
 public class CarService
 {
 	@Autowired
-	CarRepository repo;
+	CarRepository carRepository;
 	
 	//region Get
 	public List<Car> getAllCars()
 	{
-		return repo.findAll();
+		return carRepository.findAll();
 	}
 	
 	public Car getCarById(Long id)
 	{
-		return repo.findById(id).get();
+		return carRepository.findById(id).get();
 	}
 	//region
 	
 	//region Post
 	public Car addCar(Car car)
 	{
-		return repo.save(car);
+		return carRepository.save(car);
 	}
 	
 	public Car addReparationToCar(Long carId, Reparation reparation)
 	{
-		Car car = repo.findById(carId).get();
+		Car car = carRepository.findById(carId).get();
 		car.addReparation(reparation);
-		return repo.save(car);
+		return carRepository.save(car);
 	}
 	
 	public Car setExecuteStatus(long id, boolean executeStatus)
 	{
-		Car car = repo.findById(id).get();
+		Car car = carRepository.findById(id).get();
 		car.setExecuteStatus(executeStatus);
-		return repo.save(car);
+		return carRepository.save(car);
 	}
 	//endregion
 	
 	//region Put
 	public Car editCar(Long id, Car c)
 	{
-		return repo.findById(id)
+		return carRepository.findById(id)
 				.map(
 						car ->
 						{
@@ -60,7 +60,7 @@ public class CarService
 							car.setAtShop(c.isAtShop());
 							car.setPayed(c.isPayed());
 							
-							return repo.save(car);
+							return carRepository.save(car);
 						}
 				).orElseGet(() ->
 						{
@@ -73,7 +73,7 @@ public class CarService
 	//region Delete
 	public void deleteCar(Long id)
 	{
-		repo.deleteById(id);
+		carRepository.deleteById(id);
 	}
 	//endregion
 }
