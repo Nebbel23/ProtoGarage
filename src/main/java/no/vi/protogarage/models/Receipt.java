@@ -37,9 +37,8 @@ public class Receipt
 	//Maakt het bonnentje
 	public String generate()
 	{
-		String r = "";
+		String r = "\n";
 		
-		r += whiteLine();
 		r += endLine();
 		r += whiteLine();
 		r += centerLine(GARAGE_NAME);

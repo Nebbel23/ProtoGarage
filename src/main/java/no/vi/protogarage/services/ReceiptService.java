@@ -13,13 +13,11 @@ public class ReceiptService
 	
 	public Receipt getReceipt(Long carId)
 	{
-		System.out.println(carService.getCarById(carId));
 		return new Receipt(carService.getCarById(carId));
 	}
 	
 	public String getGeneratedReceipt(Long carId)
 	{
-		System.out.println(carService.getCarById(carId));
 		return new Receipt(carService.getCarById(carId)).generate();
 	}
 }

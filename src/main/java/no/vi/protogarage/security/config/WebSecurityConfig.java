@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import static no.vi.protogarage.config.Constants.PATH_PREFIX;
+
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
@@ -32,7 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 				//TODO USERROLLEN!!!
 				//todo kijken of dit invloed heeft op /car/nogiets
 				
-				.antMatchers("/api/v*/car/**").hasAnyAuthority(AppUserRole.ADMIN.name(), AppUserRole.MECHANIC.name())
+				.antMatchers(PATH_PREFIX + "/car/**").hasAnyAuthority(AppUserRole.ADMIN.name(), AppUserRole.MECHANIC.name())
+				//.antMatchers().hasAnyAuthority()
 				.anyRequest()
 				.authenticated()
 				.and()

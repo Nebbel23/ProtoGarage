@@ -1,5 +1,7 @@
 package no.vi.protogarage.models;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ public class Car
 	private boolean atShop = false;
 	@Column(nullable = false)
 	private boolean payed = false;
+	@Column
+	private String papersId;
 	@Column
 	@ManyToMany//(cascade = CascadeType.PERSIST)//TODO checken of weghalen
 	private List<Reparation> reparations = new ArrayList<Reparation>();
@@ -74,6 +78,16 @@ public class Car
 	public void setReparations(List<Reparation> reparations)
 	{
 		this.reparations = reparations;
+	}
+	
+	public String getPapersId()
+	{
+		return papersId;
+	}
+	
+	public void setPapersId(String papersId)
+	{
+		this.papersId = papersId;
 	}
 	//endregion
 	

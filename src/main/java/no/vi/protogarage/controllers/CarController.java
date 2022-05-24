@@ -1,10 +1,13 @@
 package no.vi.protogarage.controllers;
 
+import no.vi.protogarage.message.ResponseMessage;
 import no.vi.protogarage.models.Car;
 import no.vi.protogarage.models.Reparation;
 import no.vi.protogarage.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -35,10 +38,16 @@ public class CarController
 		return service.getCarById(id);
 	}
 	
-	@GetMapping("/cancel/{id}")
+	@GetMapping("/{id}/cancel")
 	private Car setExecuteStatus(@PathVariable("id") Long id)
 	{
 		return service.setExecuteStatus(id, false);
+	}
+	
+	@GetMapping("/{id}/papers")
+	private ResponseEntity<byte[]> getPapers(@PathVariable("id") Long id)
+	{
+		return service.getPapers(id);
 	}
 	//endregion
 	
@@ -53,6 +62,12 @@ public class CarController
 	private Car addReparationToCar(@PathVariable("id") Long id, @RequestBody Reparation reparation)
 	{
 		return service.addReparationToCar(id, reparation);
+	}
+	
+	@PostMapping("/{id}/papers")
+	public ResponseEntity<ResponseMessage> uploadPapers(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file)
+	{
+		return service.uploadPapers(id, file);
 	}
 	//endregion
 	

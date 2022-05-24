@@ -3,10 +3,11 @@ package no.vi.protogarage.controllers;
 import no.vi.protogarage.models.Receipt;
 import no.vi.protogarage.services.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 
@@ -23,17 +24,21 @@ public class ReceiptController
 	}
 	
 	@GetMapping("/{id}")
-	private Receipt getReceipt(@PathVariable("id") Long carId)
+	private Receipt getReceipt(@PathVariable("id") Long carId) throws IOException
 	{
+		String content = service.getReceipt(carId).generate();
+		String path = "/receipt.txt";
+		Files.write( Paths.get(path), content.getBytes());
+		
 		return service.getReceipt(carId);
 	}
-	
+
 	@GetMapping("/generated/{id}")
 	private String getGeneratedReceipt(@PathVariable("id") Long carId)
 	{
 		return service.getGeneratedReceipt(carId);
 	}
-
+	
 	//TODO DOWNLOADER VOOR RECEIPT
 	//TODO DIT WEGHALEN
 	
