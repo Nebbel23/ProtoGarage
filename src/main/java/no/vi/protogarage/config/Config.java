@@ -25,7 +25,7 @@ public class Config
 	private final ReparationService reparationService;
 	
 	@Bean
-	CommandLineRunner partCommandLineRunner(PartRepository repo)
+	CommandLineRunner partCommandLineRunner(PartRepository partRepository)
 	{
 		return args ->
 		{
@@ -34,15 +34,15 @@ public class Config
 			Part lambdaSensor = new Part("Lambdasensor", 7398);
 			Part wiper = new Part("Ruitenwisser", 730);
 			
-			repo.save(blinkerFluid);
-			repo.save(brakeDisc);
-			repo.save(lambdaSensor);
-			repo.save(wiper);
+			partRepository.save(blinkerFluid);
+			partRepository.save(brakeDisc);
+			partRepository.save(lambdaSensor);
+			partRepository.save(wiper);
 		};
 	}
 	
 	@Bean
-	CommandLineRunner laborCommandLineRunner(LaborRepository repo)
+	CommandLineRunner laborCommandLineRunner(LaborRepository laborRepository)
 	{
 		return args ->
 		{
@@ -53,14 +53,14 @@ public class Config
 			Labor brakeDiscLabor = new Labor("Remschijf vervangen", "Vervangen van een remschijf", 60);
 			brakeDiscLabor.addPart(partService.getPartById(2l));
 			
-			repo.save(inspection);
-			repo.save(wiperLabor);
-			repo.save(brakeDiscLabor);
+			laborRepository.save(inspection);
+			laborRepository.save(wiperLabor);
+			laborRepository.save(brakeDiscLabor);
 		};
 	}
 	
 	@Bean
-	CommandLineRunner reparationCommandLineRunner(ReparationRepository repo)
+	CommandLineRunner reparationCommandLineRunner(ReparationRepository reparationRepository)
 	{
 		return args ->
 		{
@@ -74,14 +74,14 @@ public class Config
 			replaceFrontBrakeDiscs.addLabor(laborService.getLaborById(3l));
 			replaceFrontBrakeDiscs.addLabor(laborService.getLaborById(3l));
 			
-			repo.save(inspectionReparation);
-			repo.save(replaceWiper);
-			repo.save(replaceFrontBrakeDiscs);
+			reparationRepository.save(inspectionReparation);
+			reparationRepository.save(replaceWiper);
+			reparationRepository.save(replaceFrontBrakeDiscs);
 		};
 	}
 	
 	@Bean
-	CommandLineRunner carCommandLineRunner(CarRepository repo)
+	CommandLineRunner carCommandLineRunner(CarRepository carRepository)
 	{
 		return args ->
 		{
@@ -109,9 +109,9 @@ public class Config
 			ford.addReparation(reparationService.getReparationById(1l));
 			ford.addReparation(reparationService.getReparationById(3l));
 			
-			repo.save(mitsubishi);
-			repo.save(kia);
-			repo.save(ford);
+			carRepository.save(mitsubishi);
+			carRepository.save(kia);
+			carRepository.save(ford);
 			
 			//todo weghalen
 			Receipt receipt = new Receipt(mitsubishi);//carService.getCarById(1l));

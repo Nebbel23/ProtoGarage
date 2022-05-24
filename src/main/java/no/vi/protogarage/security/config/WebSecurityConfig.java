@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 				//TODO USERROLLEN!!!
 				//todo kijken of dit invloed heeft op /car/nogiets
 				
-				.antMatchers("/api/v*/car/**").hasAnyAuthority(AppUserRole.ADMIN.name())
+				.antMatchers("/api/v*/car/**").hasAnyAuthority(AppUserRole.ADMIN.name(), AppUserRole.MECHANIC.name())
 				.anyRequest()
 				.authenticated()
 				.and()
