@@ -207,4 +207,3 @@ class ConfigTest
 		verify(appUserRepository, atLeast(1)).save((AppUser) any());
 	}
 }
-
