@@ -12,7 +12,7 @@ import java.util.List;
 public class Car
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)                //Kenteken wordt niet gegenereerd
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false, name = "id")
 	private Long id;
 	@Column(nullable = false)

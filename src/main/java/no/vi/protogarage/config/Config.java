@@ -47,9 +47,9 @@ public class Config
 		return args ->
 		{
 			Labor inspection = new Labor("Inspecteren", "Inspecteren van de auto", 30);
-			inspection.setFixedPriceCost(4500);					//Inspectie kost altijd €45,-
+			inspection.setFixedPriceCost(4500);                    //Inspectie kost altijd €45,-
 			Labor wiperLabor = new Labor("Wisser vervangen", "Vervangen van de een ruitenwisser", 15);
-			wiperLabor.addPart(partService.getPartById(4L));	//Wiper heeft 4 als id
+			wiperLabor.addPart(partService.getPartById(4L));    //Wiper heeft 4 als id
 			Labor brakeDiscLabor = new Labor("Remschijf vervangen", "Vervangen van een remschijf", 60);
 			brakeDiscLabor.addPart(partService.getPartById(2L));
 			

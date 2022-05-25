@@ -207,7 +207,7 @@ public class Receipt
 		return "€" + String.format("%.2f", (double) cents / 100);
 	}
 	
-	private String indent(int indents, String string)        			//Voegt per indent twee spaties toe links van de String
+	private String indent(int indents, String string)                    //Voegt per indent twee spaties toe links van de String
 	{
 		String retString = "";
 		for (int i = 0; i < indents; i++)
