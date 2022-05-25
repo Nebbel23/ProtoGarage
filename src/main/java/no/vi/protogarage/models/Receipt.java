@@ -75,7 +75,7 @@ public class Receipt
 	
 	public int calcVAT(Car car)
 	{
-		return (int) Math.round(calcPriceWithoutVAT(car) * 0.21);
+		return (int) Math.round(calcPriceWithoutVAT(car) * (Constants.VAT_PERCENTAGE / 100));
 	}
 	
 	public String printReparation(Reparation reparation)

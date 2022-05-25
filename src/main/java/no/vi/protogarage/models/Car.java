@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "cars")
-public class Car
+public class Car extends Labor
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Car
 	@Column
 	private String papersId;
 	@Column
-	@ManyToMany//(cascade = CascadeType.PERSIST)//TODO checken of weghalen
+	@ManyToMany
 	private List<Reparation> reparations = new ArrayList<Reparation>();
 	
 	//region Getters & setters
