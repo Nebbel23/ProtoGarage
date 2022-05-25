@@ -29,9 +29,6 @@ public class Car
 	@ManyToMany//(cascade = CascadeType.PERSIST)//TODO checken of weghalen
 	private List<Reparation> reparations = new ArrayList<Reparation>();
 	
-	//todo pdf reader ding
-	private String papers;
-	
 	//region Getters & setters
 	public String getRegistration()
 	{

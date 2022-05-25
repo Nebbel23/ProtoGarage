@@ -14,25 +14,25 @@ import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 @RequestMapping(PATH_PREFIX + "/reparation")
 public class ReparationController
 {
-	private final ReparationService service;
+	private final ReparationService reparationService;
 	
 	@Autowired
-	private ReparationController(ReparationService service)
+	private ReparationController(ReparationService reparationService)
 	{
-		this.service = service;
+		this.reparationService = reparationService;
 	}
 	
 	//region Get
 	@GetMapping
 	private List<Reparation> getAllReparations()
 	{
-		return service.getAllReparations();
+		return reparationService.getAllReparations();
 	}
 	
 	@GetMapping("/{id}")
 	private Reparation getReparationById(@PathVariable("id") Long id)
 	{
-		return service.getReparationById(id);
+		return reparationService.getReparationById(id);
 	}
 	//endregion
 	
@@ -40,13 +40,13 @@ public class ReparationController
 	@PostMapping
 	private void addReparation(@RequestBody Reparation reparation)
 	{
-		service.addReparation(reparation);
+		reparationService.addReparation(reparation);
 	}
 	
 	@PostMapping("/{id}")
 	private Reparation addLaborToReparation(@PathVariable("id") Long id, @RequestBody Labor labor)
 	{
-		return service.addLaborToReparation(id, labor);
+		return reparationService.addLaborToReparation(id, labor);
 	}
 	//endregion
 	
@@ -54,7 +54,7 @@ public class ReparationController
 	@PutMapping("/{id}")
 	private void editReparation(@RequestBody Reparation reparation, @PathVariable("id") Long id)
 	{
-		service.editReparation(id, reparation);
+		reparationService.editReparation(id, reparation);
 	}
 	//endregion
 	
@@ -62,7 +62,7 @@ public class ReparationController
 	@DeleteMapping("/{id}")
 	private void deleteReparation(@PathVariable("id") Long id)
 	{
-		service.deleteReparation(id);
+		reparationService.deleteReparation(id);
 	}
 	//endregion
 }

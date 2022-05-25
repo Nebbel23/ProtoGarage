@@ -14,25 +14,25 @@ import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 @RequestMapping(PATH_PREFIX + "/labor")
 public class LaborController
 {
-	private final LaborService service;
+	private final LaborService laborService;
 	
 	@Autowired
-	private LaborController(LaborService service)
+	private LaborController(LaborService laborService)
 	{
-		this.service = service;
+		this.laborService = laborService;
 	}
 	
 	//region Get
 	@GetMapping
 	private List<Labor> getAllLabor()
 	{
-		return service.getAllLabor();
+		return laborService.getAllLabor();
 	}
 	
 	@GetMapping("/{id}")
 	private Labor getLaborById(@PathVariable("id") Long id)
 	{
-		return service.getLaborById(id);
+		return laborService.getLaborById(id);
 	}
 	//endregion
 	
@@ -40,13 +40,13 @@ public class LaborController
 	@PostMapping
 	private Labor addLabor(@RequestBody Labor labor)
 	{
-		return service.addLabor(labor);
+		return laborService.addLabor(labor);
 	}
 	
 	@PostMapping("/{id}")
 	private Labor addPartToLabor(@PathVariable("id") Long id, @RequestBody Part part)
 	{
-		return service.addPartToLabor(id, part);
+		return laborService.addPartToLabor(id, part);
 	}
 	//endregion
 	
@@ -54,7 +54,7 @@ public class LaborController
 	@PutMapping("/{id}")
 	private void editLabor(@RequestBody Labor labor, @PathVariable("id") Long id)
 	{
-		service.editLabor(id, labor);
+		laborService.editLabor(id, labor);
 	}
 	//endregion
 	
@@ -62,7 +62,7 @@ public class LaborController
 	@DeleteMapping("/{id}")
 	private void deleteLabor(@PathVariable("id") Long id)
 	{
-		service.deleteLabor(id);
+		laborService.deleteLabor(id);
 	}
 	//endregion
 }

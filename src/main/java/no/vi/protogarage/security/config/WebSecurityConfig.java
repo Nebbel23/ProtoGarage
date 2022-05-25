@@ -34,8 +34,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 				//TODO USERROLLEN!!!
 				//todo kijken of dit invloed heeft op /car/nogiets
 				
+				.antMatchers(PATH_PREFIX + "/customer/**").hasAnyAuthority(AppUserRole.CASHIER.name(), AppUserRole.ADMIN.name())
 				.antMatchers(PATH_PREFIX + "/car/**").hasAnyAuthority(AppUserRole.ADMIN.name(), AppUserRole.MECHANIC.name())
-				//.antMatchers().hasAnyAuthority()
+				.antMatchers(PATH_PREFIX + "/reparation").hasAnyAuthority(AppUserRole.ADMIN.name())
+				
+				//.antMatchers(PATH_PREFIX + "").hasAnyAuthority(AppUserRole.ADMIN.name())
+				
+				
 				.anyRequest()
 				.authenticated()
 				.and()
@@ -59,59 +64,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 		return provider;
 	}
 }
-
-
-
-
-
-//https://spring.io/guides/gs/securing-web/
-
-
-
-//package no.vi.protogarage.security.config;
-//
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.core.userdetails.User;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-//
-//@Configuration
-//@EnableWebSecurity
-//public class WebSecurityConfig extends WebSecurityConfigurerAdapter
-//{
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception
-//	{
-//		http
-//				.authorizeRequests()
-//				.antMatchers("/", "/home").permitAll()
-//				//.antMatchers("/Car").permitAll()
-//				.anyRequest().authenticated()
-//				.and()
-//				.formLogin()
-//				.loginPage("/login")
-//				.permitAll()
-//				.and()
-//				.logout()
-//				.permitAll();
-//	}
-//
-//	@Bean
-//	@Override
-//	public UserDetailsService userDetailsService()
-//	{
-//		UserDetails user =
-//				User.withDefaultPasswordEncoder()
-//						.username("user")
-//						.password("password")
-//						.roles("USER")
-//						.build();
-//
-//		return new InMemoryUserDetailsManager(user);
-//	}
-//}

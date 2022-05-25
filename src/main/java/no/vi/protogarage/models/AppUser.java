@@ -39,7 +39,7 @@ public class AppUser implements UserDetails
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private AppUserRole appUserRole;
-	private boolean locked;							//todo hoofdletter Boolean
+	private boolean locked;
 	private boolean enabled;
 	
 	public AppUser(String name, String username, String password, AppUserRole appUserRole, boolean locked, boolean enabled)

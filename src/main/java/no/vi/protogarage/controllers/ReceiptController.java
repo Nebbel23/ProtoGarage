@@ -11,17 +11,17 @@ import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 @RequestMapping(PATH_PREFIX + "/receipt")
 public class ReceiptController
 {
-	private final ReceiptService service;
+	private final ReceiptService receiptService;
 	
 	@Autowired
-	private ReceiptController(ReceiptService service)
+	private ReceiptController(ReceiptService receiptService)
 	{
-		this.service = service;
+		this.receiptService = receiptService;
 	}
 	
 	@GetMapping("/{id}")
 	private ResponseEntity<byte[]> getReceipt(@PathVariable("id") Long carId)
 	{
-		return service.downloadReceipt(carId);
+		return receiptService.downloadReceipt(carId);
 	}
 }

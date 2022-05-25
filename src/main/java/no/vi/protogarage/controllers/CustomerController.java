@@ -14,25 +14,25 @@ import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 @RequestMapping(PATH_PREFIX + "/customer")
 public class CustomerController
 {
-	private final CustomerService service;
+	private final CustomerService customerService;
 	
 	@Autowired
-	private CustomerController(CustomerService service)
+	private CustomerController(CustomerService customerService)
 	{
-		this.service = service;
+		this.customerService = customerService;
 	}
 	
 	//region Get
 	@GetMapping
 	private List<Customer> getAllCustomers()
 	{
-		return service.getAllCustomers();
+		return customerService.getAllCustomers();
 	}
 	
 	@GetMapping("/{id}")
 	private Customer getCustomerById(@PathVariable("id") Long id)
 	{
-		return service.getCustomerById(id);
+		return customerService.getCustomerById(id);
 	}
 	//endregion
 	
@@ -40,13 +40,13 @@ public class CustomerController
 	@PostMapping
 	private void addCustomer(@RequestBody Customer customer)
 	{
-		service.addCustomer(customer);
+		customerService.addCustomer(customer);
 	}
 	
 	@PostMapping("/{id}")
 	private Customer addCarToCustomer(@PathVariable("id") Long id, @RequestBody Car car)
 	{
-		return service.addCarToCustomer(id, car);
+		return customerService.addCarToCustomer(id, car);
 	}
 	//endregion
 	
@@ -54,7 +54,7 @@ public class CustomerController
 	@PutMapping("/{id}")
 	private void editCustomer(@RequestBody Customer customer, @PathVariable("id") Long id)
 	{
-		service.editCustomer(id, customer);
+		customerService.editCustomer(id, customer);
 	}
 	//endregion
 	
@@ -62,7 +62,7 @@ public class CustomerController
 	@DeleteMapping("/{id}")
 	private void deleteCustomer(@PathVariable("id") Long id)
 	{
-		service.deleteCustomer(id);
+		customerService.deleteCustomer(id);
 	}
 	//endregion
 }

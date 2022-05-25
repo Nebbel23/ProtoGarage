@@ -124,7 +124,7 @@ public class Config
 	{
 		return args ->
 		{
-			AppUser admin = new AppUser("Niels", "admin", encoder.bCryptPasswordEncoder().encode("root"), AppUserRole.ADMIN, false, true);
+			AppUser admin = new AppUser("Niels", "admin", encoder.bCryptPasswordEncoder().encode("admin"), AppUserRole.ADMIN, false, true);
 			AppUser backoffice = new AppUser("Alice", "backoffice", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.BACKOFFICE, false, true);
 			AppUser cashier = new AppUser("Anthonie", "cashier", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.CASHIER, false, true);
 			AppUser mechanic = new AppUser("Rick", "mechanic", encoder.bCryptPasswordEncoder().encode("pass"), AppUserRole.MECHANIC, false, true);

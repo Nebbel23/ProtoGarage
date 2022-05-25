@@ -13,6 +13,6 @@ public class Constants
 	public static final int VAT_PERCENTAGE = 21;			//BTW-percentage
 	
 	//Bonnetje
-	public static final int STANDARD_WIDTH = 62;			//Werkt alleen met even getallen, wordt anders automatisch met 1 opgehoogd
+	public static final int STANDARD_WIDTH = 52;			//Werkt alleen met even getallen, wordt anders automatisch met 1 opgehoogd
 	public static final String INDENT_SPACES = "  ";		//Het aantal spaties dat wordt gebruikt voor indents in het bonnetje
 }

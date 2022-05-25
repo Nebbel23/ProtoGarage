@@ -17,37 +17,37 @@ import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 @RequestMapping(PATH_PREFIX + "/car")
 public class CarController
 {
-	private final CarService service;
+	private final CarService carService;
 	
 	@Autowired
-	private CarController(CarService service)
+	private CarController(CarService carService)
 	{
-		this.service = service;
+		this.carService = carService;
 	}
 	
 	//region Get
 	@GetMapping
 	private List<Car> getAllCars()
 	{
-		return service.getAllCars();
+		return carService.getAllCars();
 	}
 	
 	@GetMapping("/{id}")
 	private Car getCarById(@PathVariable("id") Long id)
 	{
-		return service.getCarById(id);
+		return carService.getCarById(id);
 	}
 	
 	@GetMapping("/{id}/cancel")
 	private Car setExecuteStatus(@PathVariable("id") Long id)
 	{
-		return service.setExecuteStatus(id, false);
+		return carService.setExecuteStatus(id, false);
 	}
 	
 	@GetMapping("/{id}/papers")
 	private ResponseEntity<byte[]> getPapers(@PathVariable("id") Long id)
 	{
-		return service.getPapers(id);
+		return carService.getPapers(id);
 	}
 	//endregion
 	
@@ -55,19 +55,19 @@ public class CarController
 	@PostMapping
 	private Car addCar(@RequestBody Car car)
 	{
-		return service.addCar(car);
+		return carService.addCar(car);
 	}
 	
 	@PostMapping("/{id}")
 	private Car addReparationToCar(@PathVariable("id") Long id, @RequestBody Reparation reparation)
 	{
-		return service.addReparationToCar(id, reparation);
+		return carService.addReparationToCar(id, reparation);
 	}
 	
 	@PostMapping("/{id}/papers")
 	public ResponseEntity<ResponseMessage> uploadPapers(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file)
 	{
-		return service.uploadPapers(id, file);
+		return carService.uploadPapers(id, file);
 	}
 	//endregion
 	
@@ -75,7 +75,7 @@ public class CarController
 	@PutMapping("/{id}")
 	private Car editCar(@RequestBody Car car, @PathVariable("id") Long id)
 	{
-		return service.editCar(id, car);
+		return carService.editCar(id, car);
 	}
 	//endregion
 	
@@ -83,7 +83,7 @@ public class CarController
 	@DeleteMapping("/{id}")
 	private void deleteCar(@PathVariable("id") Long id)
 	{
-		service.deleteCar(id);
+		carService.deleteCar(id);
 	}
 	//endregion
 }

@@ -13,25 +13,25 @@ import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 @RequestMapping(PATH_PREFIX + "/part")
 public class PartController
 {
-	private final PartService service;
+	private final PartService partService;
 	
 	@Autowired
-	private PartController(PartService service)
+	private PartController(PartService partService)
 	{
-		this.service = service;
+		this.partService = partService;
 	}
 	
 	//region Get
 	@GetMapping
 	private List<Part> getAllParts()
 	{
-		return service.getAllParts();
+		return partService.getAllParts();
 	}
 	
 	@GetMapping("/{id}")
 	private Part getPartById(@PathVariable("id") Long id)
 	{
-		return service.getPartById(id);
+		return partService.getPartById(id);
 	}
 	//endregion
 	
@@ -39,7 +39,7 @@ public class PartController
 	@PostMapping
 	private void addPart(@RequestBody Part part)
 	{
-		service.addPart(part);
+		partService.addPart(part);
 	}
 	//endregion
 	
@@ -47,7 +47,7 @@ public class PartController
 	@PutMapping("/{id}")
 	private void editPart(@RequestBody Part part, @PathVariable("id") Long id)
 	{
-		service.editPart(id, part);
+		partService.editPart(id, part);
 	}
 	//endregion
 	
@@ -55,7 +55,7 @@ public class PartController
 	@DeleteMapping("/{id}")
 	private void deletePart(@PathVariable("id") Long id)
 	{
-		service.deletePart(id);
+		partService.deletePart(id);
 	}
 	//endregion
 }

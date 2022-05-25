@@ -13,8 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import static no.vi.protogarage.config.Constants.PATH_PREFIX;
 
-//TODO Service maken
-
 @Controller
 @RequestMapping(PATH_PREFIX + "/files")
 @CrossOrigin("http://localhost:8081")
